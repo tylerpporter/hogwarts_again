@@ -1,5 +1,7 @@
 <h1><%= @professor.name %></h1>
 
-<%= @professor.students.each do |student| %>
+Average Age: <%= @professor.students.average(:age) %>
+
+<% @professor.students.each do |student| %>
   <p><%= student.name %></p>
 <% end %>
