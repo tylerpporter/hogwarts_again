@@ -10,12 +10,12 @@ RSpec.describe "As a visitor" do
     @malfoy = Student.create(name: "Draco Malfoy" , age: 12 , house: "Slytherin" )
     @longbottom = Student.create(name: "Neville Longbottom" , age: 11 , house: "Gryffindor" )
 
-    ProfessorStudent.create(student_id: @harry, professor_id: @snape)
-    ProfessorStudent.create(student_id: @harry, professor_id: @hagarid)
-    ProfessorStudent.create(student_id: @harry, professor_id: @lupin)
-    ProfessorStudent.create(student_id: @malfoy, professor_id: @hagarid)
-    ProfessorStudent.create(student_id: @malfoy, professor_id: @lupin)
-    ProfessorStudent.create(student_id: @longbottom, professor_id: @snape)
+    ProfessorStudent.create(student: @harry, professor: @snape)
+    ProfessorStudent.create(student: @harry, professor: @hagarid)
+    ProfessorStudent.create(student: @harry, professor: @lupin)
+    ProfessorStudent.create(student: @malfoy, professor: @hagarid)
+    ProfessorStudent.create(student: @malfoy, professor: @lupin)
+    ProfessorStudent.create(student: @longbottom, professor: @snape)
   end
   describe "When I visit /professors"
   it "I see a list of professors and their info" do
@@ -31,6 +31,13 @@ RSpec.describe "As a visitor" do
       expect(page).to have_content("Age: 45")
       expect(page).to have_content("Specialty: Potions")
     end
+  end
+  describe "When I visit /professors/:id"
+  it "I see a list of names of the students the professors have" do
+    visit "/professors/#{@snape.id}"
 
+    expect(page).to have_content(@harry.name)
+    expect(page).to have_content(@longbottom.name)
+    expect(page).to_not have_content(@malfoy.name)
   end
 end
