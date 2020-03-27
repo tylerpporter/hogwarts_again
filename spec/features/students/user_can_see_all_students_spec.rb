@@ -25,9 +25,12 @@ RSpec.describe "As a visitor" do
     expect(page).to have_content(@malfoy.name)
     expect(page).to have_content(@longbottom.name)
 
+    @malfoy.name.should appear_before(@harry.name)
+    @harry.name.should appear_before(@longbottom.name)
+
     within "#student-#{@harry.id}" do
       expect(page).to have_content("Harry Potter: 3")
-    end 
+    end
   end
 
 end

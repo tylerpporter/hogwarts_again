@@ -26,6 +26,7 @@ RSpec.describe "As a visitor" do
     expect(page).to have_content("Remus Lupin")
 
     "Remus Lupin".should appear_before("Rubus Hagarid")
+    "Rubus Hagarid".should appear_before("Severus Snape")
 
 
     within "#professor-info-#{@snape.id}" do
